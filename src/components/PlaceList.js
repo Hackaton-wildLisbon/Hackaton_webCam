@@ -1,9 +1,9 @@
 import React from 'react';
 
-const SelectCountry = ({ value, handleSelectCountry, options }) => (
+const PlaceList = ({ title, handleCountryId, options }) => (
   <div className="form-group">
-    <label htmlFor="country"> Country </label>
-    <select name="country" value={value} onChange={handleSelectCountry}>
+    <label htmlFor="location"> Locations </label>
+    <select name="location" value={title} onChange={handleCountryId}>
       <option value="" disabled>
         Select Country
       </option>
@@ -16,7 +16,7 @@ const SelectCountry = ({ value, handleSelectCountry, options }) => (
   </div>
 );
 
-export default SelectCountry;
+export default PlaceList;
 
 {
   /* <Form>
