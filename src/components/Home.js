@@ -1,7 +1,10 @@
-import React from 'react';
-import axios from 'axios';
-import SelectCountry from './SelectCountry';
+import React from "react";
+import axios from "axios";
+import SelectCountry from "./SelectCountry";
+import Information from "./Information";
+import WebCam from "./WebCam";
 import PlaceList from './PlaceList';
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -80,5 +83,3 @@ class Home extends React.Component {
   }
 }
 export default Home;
-
-/* https://api.windy.com/api/webcams/v2/list?show=countries&key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q*/
