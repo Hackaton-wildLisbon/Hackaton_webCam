@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Faster One';
+  src: url(../assets/FasterOne-Regular.ttf);
+}
+
+h1 {
+  font-family: 'Faster One';
+  font-size: 5em;
+  color: rgb(0, 0, 82);
+}
+
+p {
+  font-weight: bold;
+}

@@ -1,10 +1,10 @@
-import React from "react";
-import axios from "axios";
-import SelectCountry from "./SelectCountry";
-import Information from "./Information";
-import WebCam from "./WebCam";
+import React from 'react';
+import axios from 'axios';
+import SelectCountry from './SelectCountry';
+import Information from './Information';
+import WebCam from './WebCam';
 import PlaceList from './PlaceList';
-
+import './Home.css';
 
 class Home extends React.Component {
   constructor(props) {
@@ -43,11 +43,11 @@ class Home extends React.Component {
       }
     });
     this.setState({ countryId: selectedCountry.id }, () => {
-      this.getPlaceList();
+      this.getPlaceList(country);
     });
   }
 
-  getPlaceList() {
+  getPlaceList(country) {
     axios
       .get(
         `https://api.windy.com/api/webcams/v2/list/country=${this.state.countryId}?key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`,
@@ -55,14 +55,18 @@ class Home extends React.Component {
       .then((res) => {
         this.setState({ placeList: res.data.result.webcams });
       });
+    // if (this.state.country !== country) {
+    //   this.setState({ placeList: [] });
+    // }
   }
 
   render() {
     console.log(this.state.placeList);
     return (
       <>
+        <h1>Wild Winds</h1>
+        <p>Choose a country and then the location to load the camera</p>
         <div>
-          <h1>Please, select a country</h1>
           <SelectCountry
             options={this.state.countriesList.map((el) => el.name)}
             value={this.state.country}
@@ -71,7 +75,6 @@ class Home extends React.Component {
         </div>
 
         <div>
-          <h1>Please, select a location</h1>
           <PlaceList
             options={this.state.placeList.map((el) => el.title)}
             title={this.state.title}
