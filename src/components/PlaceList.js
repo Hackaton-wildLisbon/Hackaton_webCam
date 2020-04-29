@@ -1,11 +1,11 @@
 import React from 'react';
 
-const PlaceList = ({ title, handleCountryId, options }) => (
+const PlaceList = ({ value,  options,handleSelectLocation }) => (
   <div className="form-group">
     <label htmlFor="location"> Locations </label>
-    <select name="location" value={title} onChange={handleCountryId}>
+    <select name="location" value={value} onChange={handleSelectLocation}>
       <option value="" disabled>
-        Select Country
+        Select location
       </option>
       {options.map((option) => (
         <option key={option} value={option} label={option}>
@@ -13,6 +13,7 @@ const PlaceList = ({ title, handleCountryId, options }) => (
         </option>
       ))}
     </select>
+    
   </div>
 );
 
