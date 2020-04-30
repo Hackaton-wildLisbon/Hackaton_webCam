@@ -14,7 +14,7 @@ const PlaceList = ({ value, options, handleSelectLocation }) => (
         value={value}
         onChange={handleSelectLocation}
       >
-         <option value="" disabled>
+         <option value="">
            Select location</option>
         {options.map((option) => (
           <option key={option} value={option} label={option}>
