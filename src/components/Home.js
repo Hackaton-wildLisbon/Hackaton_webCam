@@ -6,7 +6,7 @@ import WebCam from './WebCam';
 import PlaceList from './PlaceList';
 import Loading from './Loading';
 import './Home.css';
-
+import sonic from '../assets/sonic.gif';
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,9 +19,9 @@ class Home extends React.Component {
       location: '',
       locationID: '',
       webcamView: [],
-	  infos: [],
-	  loadingwebCam: false,
-	  loadingLoc: false,
+      infos: [],
+      loadingwebCam: false,
+      loadingLoc: false,
     };
 
     this.handleCountryId = this.handleCountryId.bind(this);
@@ -58,19 +58,19 @@ class Home extends React.Component {
   }
 
   getPlaceList() {
-	const loadingLoc= true;
-	this.setState({loadingLoc}) 
+    const loadingLoc = true;
+    this.setState({ loadingLoc });
     axios
       .get(
         `https://api.windy.com/api/webcams/v2/list/country=${this.state.countryId}?key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`,
       )
       .then((res) => {
-        this.setState({ 
-			loadingLoc:false,
-			placeList: res.data.result.webcams });
+        this.setState({
+          loadingLoc: false,
+          placeList: res.data.result.webcams,
+        });
       });
   }
-
 
   handleSelectLocation = (e) => {
     const location = e.target.value;
@@ -101,25 +101,28 @@ class Home extends React.Component {
   }
 
   getInfoCountry(locationID) {
-	const loadingwebCam= true;
-	this.setState({loadingwebCam})
-	const urlBase = `https://api.windy.com/api/webcams/v2/list/webcam=`;
+    const loadingwebCam = true;
+    this.setState({ loadingwebCam });
+    const urlBase = `https://api.windy.com/api/webcams/v2/list/webcam=`;
     const urlEnd = `?show=webcams:image,location,player&key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`;
     const url = `${urlBase}${locationID}${urlEnd}`;
 
     axios.get(url).then((res) => {
-      this.setState({ 
-		loadingwebCam: false, 
-		infos: res.data.result.webcams[0].location });
+      this.setState({
+        loadingwebCam: false,
+        infos: res.data.result.webcams[0].location,
+      });
     });
   }
-
 
   render() {
     return (
       <>
         <div>
           <h1>Wild Winds</h1>
+          <span>
+            <img className="sonic" src={sonic} alt="running sonic" />
+          </span>
           <p>Choose a country and then the location to load the camera</p>
           <SelectCountry
             options={this.state.countriesList.map((el) => el.name)}
@@ -129,26 +132,31 @@ class Home extends React.Component {
         </div>
 
         <div>
-		{this.state.LoadingLoc ? <Loading /> : 
-		  <PlaceList
-            options={this.state.placeList.map((el) => el.title)}
-            value={this.state.location}
-            handleSelectLocation={this.handleSelectLocation}
-          />}
+          {this.state.LoadingLoc ? (
+            <Loading />
+          ) : (
+            <PlaceList
+              options={this.state.placeList.map((el) => el.title)}
+              value={this.state.location}
+              handleSelectLocation={this.handleSelectLocation}
+            />
+          )}
         </div>
         <div
           style={{
             display: 'flex',
             flexDirection: 'row',
+            flexWrap: 'wrap',
             justifyContent: 'center',
           }}
         >
-          
-		  {this.state.LoadingwebCam ? <Loading /> : 
-		  <WebCam embed={this.state.webcamView.embed} />}
-          
-		  
-		  <Information
+          {this.state.LoadingwebCam ? (
+            <Loading />
+          ) : (
+            <WebCam embed={this.state.webcamView.embed} />
+          )}
+
+          <Information
             city={this.state.infos.city}
             country={this.state.infos.country}
             continent={this.state.infos.continent}

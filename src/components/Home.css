@@ -7,8 +7,16 @@ h1 {
   font-family: 'Faster One';
   font-size: 5em;
   color: rgb(0, 0, 82);
+  display: inline-block;
+  margin-top: 60px;
 }
 
 p {
   font-weight: bold;
+}
+
+.sonic {
+  height: 80px;
+  width: 80px;
+  display: inline;
 }
