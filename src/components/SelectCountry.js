@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 
 const SelectCountry = ({ value, handleSelectCountry, options }) => (
   <Form>
-    <Form.Group controlId="exampleForm.SelectCustom">
+    <Form.Group>
       <Form.Label htmlFor="country"></Form.Label>
       <Form.Control
         id="custom-form"

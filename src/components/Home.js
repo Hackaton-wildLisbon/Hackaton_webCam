@@ -21,7 +21,7 @@ class Home extends React.Component {
       webcamView: [],
 	  infos: [],
 	  loadingwebCam: false,
-	  loadingLoc: false,
+	  // loadingLoc: false,
     };
 
     this.handleCountryId = this.handleCountryId.bind(this);
@@ -46,8 +46,8 @@ class Home extends React.Component {
     this.handleCountryId(country);
   };
 
-  handleCountryId(country) {
-    const selectedCountry = this.state.countriesList.find(function (el) {
+  handleCountryId = (country) =>  {
+    const selectedCountry = this.state.countriesList.find((el) => {
       if (country === el.name) {
         return el.id;
       }
@@ -58,15 +58,15 @@ class Home extends React.Component {
   }
 
   getPlaceList() {
-	const loadingLoc= true;
-	this.setState({loadingLoc}) 
+	// const loadingLoc= true;
+	// this.setState({loadingLoc}) 
     axios
       .get(
         `https://api.windy.com/api/webcams/v2/list/country=${this.state.countryId}?key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`,
       )
       .then((res) => {
         this.setState({ 
-			loadingLoc:false,
+			// loadingLoc:false,
 			placeList: res.data.result.webcams });
       });
   }
@@ -91,47 +91,53 @@ class Home extends React.Component {
   }
 
   getWebCam(locationID) {
+    const loadingwebCam= true;
+  this.setState({loadingwebCam})
     const urlBase = `https://api.windy.com/api/webcams/v2/list/webcam=`;
     const urlEnd = `?show=webcams:image,location,player&key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`;
     const url = `${urlBase}${locationID}${urlEnd}`;
 
     axios.get(url).then((res) => {
-      this.setState({ webcamView: res.data.result.webcams[0].player.lifetime });
+      this.setState({ loadingwebCam:true, webcamView: res.data.result.webcams[0].player.lifetime });
     });
   }
 
   getInfoCountry(locationID) {
-	const loadingwebCam= true;
-	this.setState({loadingwebCam})
+	
 	const urlBase = `https://api.windy.com/api/webcams/v2/list/webcam=`;
     const urlEnd = `?show=webcams:image,location,player&key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`;
     const url = `${urlBase}${locationID}${urlEnd}`;
 
     axios.get(url).then((res) => {
       this.setState({ 
-		loadingwebCam: false, 
+		 loadingwebCam: false, 
 		infos: res.data.result.webcams[0].location });
     });
   }
 
 
   render() {
+    console.log(this.state.loadingwebCam)
+    // {const optionList = this.state.placeList.map((el) => el.title).sort()
+    //   const uniqueSet = new Set(optionList);
+    // const optionClean = [...uniqueSet]}
     return (
       <>
         <div>
           <h1>Wild Winds</h1>
           <p>Choose a country and then the location to load the camera</p>
           <SelectCountry
-            options={this.state.countriesList.map((el) => el.name)}
+            options={this.state.countriesList.map((el) => el.name).sort()}
             value={this.state.country}
             handleSelectCountry={this.handleSelectCountry}
           />
         </div>
 
         <div>
-		{this.state.LoadingLoc ? <Loading /> : 
+    {this.state.LoadingLoc ? <Loading /> : 
+    
 		  <PlaceList
-            options={this.state.placeList.map((el) => el.title)}
+            options={this.state.placeList.map((el) => el.title).sort()}
             value={this.state.location}
             handleSelectLocation={this.handleSelectLocation}
           />}
@@ -144,7 +150,7 @@ class Home extends React.Component {
           }}
         >
           
-		  {this.state.LoadingwebCam ? <Loading /> : 
+		  {this.state.loadingwebCam===true ? <Loading /> : 
 		  <WebCam embed={this.state.webcamView.embed} />}
           
 		  
