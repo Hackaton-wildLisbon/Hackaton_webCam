@@ -4,7 +4,9 @@ import SelectCountry from './SelectCountry';
 import Information from './Information';
 import WebCam from './WebCam';
 import PlaceList from './PlaceList';
+import Loading from './Loading';
 import './Home.css';
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -17,7 +19,9 @@ class Home extends React.Component {
       location: '',
       locationID: '',
       webcamView: [],
-      infos: [],
+	  infos: [],
+	  loadingwebCam: false,
+	  loadingLoc: false,
     };
 
     this.handleCountryId = this.handleCountryId.bind(this);
@@ -54,14 +58,19 @@ class Home extends React.Component {
   }
 
   getPlaceList() {
+	const loadingLoc= true;
+	this.setState({loadingLoc}) 
     axios
       .get(
         `https://api.windy.com/api/webcams/v2/list/country=${this.state.countryId}?key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`,
       )
       .then((res) => {
-        this.setState({ placeList: res.data.result.webcams });
+        this.setState({ 
+			loadingLoc:false,
+			placeList: res.data.result.webcams });
       });
   }
+
 
   handleSelectLocation = (e) => {
     const location = e.target.value;
@@ -92,14 +101,19 @@ class Home extends React.Component {
   }
 
   getInfoCountry(locationID) {
-    const urlBase = `https://api.windy.com/api/webcams/v2/list/webcam=`;
+	const loadingwebCam= true;
+	this.setState({loadingwebCam})
+	const urlBase = `https://api.windy.com/api/webcams/v2/list/webcam=`;
     const urlEnd = `?show=webcams:image,location,player&key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`;
     const url = `${urlBase}${locationID}${urlEnd}`;
 
     axios.get(url).then((res) => {
-      this.setState({ infos: res.data.result.webcams[0].location });
+      this.setState({ 
+		loadingwebCam: false, 
+		infos: res.data.result.webcams[0].location });
     });
   }
+
 
   render() {
     return (
@@ -115,11 +129,12 @@ class Home extends React.Component {
         </div>
 
         <div>
-          <PlaceList
+		{this.state.LoadingLoc ? <Loading /> : 
+		  <PlaceList
             options={this.state.placeList.map((el) => el.title)}
             value={this.state.location}
             handleSelectLocation={this.handleSelectLocation}
-          />
+          />}
         </div>
         <div
           style={{
@@ -128,8 +143,12 @@ class Home extends React.Component {
             justifyContent: 'center',
           }}
         >
-          <WebCam embed={this.state.webcamView.embed} />
-          <Information
+          
+		  {this.state.LoadingwebCam ? <Loading /> : 
+		  <WebCam embed={this.state.webcamView.embed} />}
+          
+		  
+		  <Information
             city={this.state.infos.city}
             country={this.state.infos.country}
             continent={this.state.infos.continent}
