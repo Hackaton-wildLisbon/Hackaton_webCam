@@ -3,7 +3,8 @@
 }
 
 body {
-  background-color: #91d2ec;
+  background-image: url('./assets/wind.jpg');
+  background-repeat: no-repeat;
 }
 
 .App-logo {

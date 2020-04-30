@@ -3,17 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
-import Navig from './components/Navig';
-
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Navig />
+  <React.StrictMode>
     <App />
-    </BrowserRouter>,
-
-  document.getElementById('root')
+  </React.StrictMode>,
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -1,0 +1,18 @@
+.card-div {
+  border: 2px solid #6ec1e2 !important;
+  box-shadow: 5px 5px 5px #4f9ab8;
+}
+
+#subtitle-text {
+  color: rgb(90, 90, 90) !important;
+}
+
+#card-title {
+  font-weight: bolder !important;
+  margin-top: 40px !important;
+}
+
+.text-card-wind {
+  margin: 0;
+  font-weight: 400;
+}
