@@ -3,8 +3,11 @@
 }
 
 body {
-  background-image: url('./assets/wind.jpg');
-  background-repeat: no-repeat;
+  background: url(./assets/wind.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .App-logo {
