@@ -3,9 +3,13 @@ import Image from 'react-bootstrap/Image';
 import teamCartoon from '../assets/teamCartoon.png';
 
 const About = () => (
-
-  <Image className='about' src={teamCartoon} fluid />
-
+  <div
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+    }}
+  >
+    <Image className="about" src={teamCartoon} fluid />;
+  </div>
 );
-
 export default About;

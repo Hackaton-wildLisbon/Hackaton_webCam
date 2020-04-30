@@ -133,12 +133,21 @@ class Home extends React.Component {
             alignItems: 'center',
           }}
         >
+          <h1>Wild Winds</h1>
+          <span>
+            <img className="sonic" src={sonic} alt="running sonic" />
+          </span>
+          <p>Choose a country and then the location to load the camera</p>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+          }}
+        >
           <div>
-            <h1>Wild Winds</h1>
-            <span>
-              <img className="sonic" src={sonic} alt="running sonic" />
-            </span>
-            <p>Choose a country and then the location to load the camera</p>
             <SelectCountry
               options={this.state.countriesList.map((el) => el.name).sort()}
               value={this.state.country}
