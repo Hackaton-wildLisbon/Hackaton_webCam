@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 
 const PlaceList = ({ value, options, handleSelectLocation }) => (
   <Form>
-    <Form.Group controlId="exampleForm.SelectCustom">
+    <Form.Group >
       <Form.Label htmlFor="location"></Form.Label>
       <Form.Control
         id="custom-placelist"
@@ -14,7 +14,8 @@ const PlaceList = ({ value, options, handleSelectLocation }) => (
         value={value}
         onChange={handleSelectLocation}
       >
-        <option value="">Select location</option>
+         <option value="" disabled>
+           Select location</option>
         {options.map((option) => (
           <option key={option} value={option} label={option}>
             {option}
