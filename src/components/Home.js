@@ -6,7 +6,7 @@ import WebCam from './WebCam';
 import PlaceList from './PlaceList';
 import Loading from './Loading';
 import './Home.css';
-
+import sonic from '../assets/sonic.gif';
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,9 +19,9 @@ class Home extends React.Component {
       location: '',
       locationID: '',
       webcamView: [],
-	  infos: [],
-	  loadingwebCam: false,
-	  // loadingLoc: false,
+	    infos: [],
+	    loadingwebCam: false,
+	    // loadingLoc: false,
     };
 
     this.handleCountryId = this.handleCountryId.bind(this);
@@ -71,7 +71,6 @@ class Home extends React.Component {
       });
   }
 
-
   handleSelectLocation = (e) => {
     const location = e.target.value;
     this.setState({ location });
@@ -103,8 +102,7 @@ class Home extends React.Component {
   }
 
   getInfoCountry(locationID) {
-	
-	const urlBase = `https://api.windy.com/api/webcams/v2/list/webcam=`;
+	  const urlBase = `https://api.windy.com/api/webcams/v2/list/webcam=`;
     const urlEnd = `?show=webcams:image,location,player&key=Gi4RuYGR0su3SKtxIGsWhfmLuJA4sA9Q`;
     const url = `${urlBase}${locationID}${urlEnd}`;
 
@@ -115,7 +113,6 @@ class Home extends React.Component {
     });
   }
 
-
   render() {
     console.log(this.state.loadingwebCam)
     // {const optionList = this.state.placeList.map((el) => el.title).sort()
@@ -125,6 +122,9 @@ class Home extends React.Component {
       <>
         <div>
           <h1>Wild Winds</h1>
+          <span>
+            <img className="sonic" src={sonic} alt="running sonic" />
+          </span>
           <p>Choose a country and then the location to load the camera</p>
           <SelectCountry
             options={this.state.countriesList.map((el) => el.name).sort()}
@@ -134,6 +134,7 @@ class Home extends React.Component {
         </div>
 
         <div>
+              
     {this.state.LoadingLoc ? <Loading /> : 
     
 		  <PlaceList
@@ -146,14 +147,14 @@ class Home extends React.Component {
           style={{
             display: 'flex',
             flexDirection: 'row',
+            flexWrap: 'wrap',
             justifyContent: 'center',
           }}
         >
           
 		  {this.state.loadingwebCam===true ? <Loading /> : 
 		  <WebCam embed={this.state.webcamView.embed} />}
-          
-		  
+           
 		  <Information
             city={this.state.infos.city}
             country={this.state.infos.country}
