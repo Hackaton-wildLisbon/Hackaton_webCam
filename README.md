@@ -8,16 +8,16 @@ We used ReactJS to create this app that is connected to the Windy API (https://a
 A 24-hour hackathon challenge using ReactJS, Javascript, HTML, CSS, React Bootstrap, axios, Netlify.
 
 #### The Team
-Catherine Blecon 
-https://www.linkedin.com/in/catherine-bl%C3%A9con-119b521a8/
+Catherine Blecon </br>
+https://www.linkedin.com/in/catherine-bl%C3%A9con-119b521a8/ </br>
+https://github.com/cath974
 
-
-Fernanda Abbud 
-https://www.linkedin.com/in/fernandaabbud/
+Fernanda Abbud </br>
+https://www.linkedin.com/in/fernandaabbud/ </br>
 https://github.com/fabbud
 
-François Arbogast 
-https://www.linkedin.com/in/fran%C3%A7ois-arbogast-8bb67978/
+François Arbogast </br>
+https://www.linkedin.com/in/fran%C3%A7ois-arbogast-8bb67978/ </br>
 https://github.com/farbogast
 
 Manuel Caramelo
